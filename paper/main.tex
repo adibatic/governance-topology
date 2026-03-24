@@ -29,9 +29,9 @@ Tohoku University
 \maketitle
 
 \begin{abstract}
-While comparative political science often relies on discrete regime typologies, this paper explores the utility of modeling state architecture as a continuous, low-dimensional manifold. Grounded in the classic political theories of Marshall and Dahl, we construct an \textit{Institutional Triad} representing Order, Liberty, and Equality. Using cross-national data ($N=66$) and manifold learning techniques (PCA and UMAP), we map governance coordinates via institutional \textit{Magnitude} (mean capacity) and \textit{Imbalance} (structural skew). 
+    While comparative political science often relies on discrete regime typologies, this paper explores the utility of modeling state architecture as a continuous, low-dimensional manifold. Grounded in the classic political theories of Marshall and Dahl, we construct an \textit{Institutional Triad} representing Order, Liberty, and Equality. Using cross-national data ($N=66$) and manifold learning techniques (PCA and UMAP), we map governance coordinates via institutional \textit{Magnitude} (mean capacity) and \textit{Imbalance} (structural skew).
 
-The analysis identifies a structural ``funnel'' pattern in the distribution of states, suggesting an empirical boundary constraint on development: while low-capacity states exhibit high structural variance, achieving the highest tiers of magnitude requires dimensional balance. However, multivariate OLS regressions find evidence for an ``Imbalance Premium'': controlling for magnitude, institutional imbalance positively associates with human development (HDI) and economic prosperity. We propose the \textit{Developmental Vanguard} hypothesis, suggesting that asymmetrical institutional growth may serve as a functional catalyst for escaping middle-income stagnation. These findings offer a topological perspective that complements existing categorical models and suggests new avenues for analyzing the geometry of political development.
+    The analysis identifies a structural ``funnel'' pattern in the distribution of states, suggesting an empirical boundary constraint on development: while low-capacity states exhibit high structural variance, achieving the highest tiers of magnitude requires dimensional balance. However, multivariate OLS regressions find evidence for an ``Imbalance Premium'': controlling for magnitude, institutional imbalance positively associates with human development (HDI) and economic prosperity. We propose the \textit{Developmental Vanguard} hypothesis, suggesting that asymmetrical institutional growth may serve as a functional catalyst for escaping middle-income stagnation. These findings offer a topological perspective that complements existing categorical models and suggests new avenues for analyzing the geometry of political development.
 \end{abstract}
 
 \section{Introduction}
@@ -59,51 +59,55 @@ More directly, Acemoglu and Robinson (2019) propose a tripartite framework of st
 
 \subsection{The Institutional Triad: Foundations and Parsimony}
 
-The selection of Order ($O$), Liberty ($L$), and Equality ($E$) synthesizes foundational theories of political development into a parsimonious geometric space. \textbf{Order} provides the requisite administrative capacity and security (Hobbes, 1651; Huntington, 1968). The remaining axes formalize Dahl’s (1971) classic dimensions of polyarchy: \textbf{Liberty} represents the degree of public contestation and negative constraints on state authority (Berlin, 1958; Acemoglu \& Robinson, 2019), while \textbf{Equality} captures the breadth of systemic participation and resource distribution (Rawls, 1971; Sen, 1999). 
+The selection of Order ($O$), Liberty ($L$), and Equality ($E$) synthesizes foundational theories of political development into a parsimonious geometric space. \textbf{Order} provides the requisite administrative capacity and security (Hobbes, 1651; Huntington, 1968). The remaining axes formalize Dahl’s (1971) classic dimensions of polyarchy: \textbf{Liberty} represents the degree of public contestation and negative constraints on state authority (Berlin, 1958; Acemoglu \& Robinson, 2019), while \textbf{Equality} captures the breadth of systemic participation and resource distribution (Rawls, 1971; Sen, 1999).
 
 While Marshall (1950) historically modeled the expansion of these rights—civil, political, and social—as sequential phases, our framework treats them as hierarchically concurrent. In this view, each emergent stage does not replace the previous one but integrates into a whole, expanding the manifold's dimensionality. The theoretical justification for this concurrency lies in the complexity of modern governance (Luhmann, 1995). A state does not cease to require foundational Order once it guarantees Liberty; rather, it must expend continuous administrative energy to maintain Order while simultaneously processing the complex societal feedback introduced by Liberty and Equality. Therefore, these dimensions do not operate strictly as a historical timeline, but as a concurrent system of interacting geometric constraints. An increase in one dimension fundamentally alters the mathematical load on the others.
 
 \section{Formal Framework}
 
-We formalize state architecture by mapping institutional profiles into a continuous metric space $\mathcal{S}$. 
+We formalize state architecture by mapping institutional profiles into a continuous metric space $\mathcal{S}$.
 
-\paragraph{Axiom 1 (The Institutional Triad).}
+\paragraph{Postulate 1 (The Institutional Triad).}
 A state $s \in \mathcal{S}$ is defined by three core dimensions: Order ($O$), Liberty ($L$), and Equality ($E$). A state's profile is a vector:
 \begin{equation}
     s = (O, L, E) \in \mathbb{R}^3_{\ge 0}.
 \end{equation}
 
-\paragraph{Axiom 2 (Institutional Magnitude and Imbalance).}
-From the triad, we derive two fundamental geometric coordinates: \textit{Magnitude} ($M$), representing mean systemic capacity, and \textit{Imbalance} ($I$), representing the structural skew (standard deviation) across axes:
+\paragraph{Postulate 2 (Institutional Magnitude and Imbalance).}
+From the triad, we derive two fundamental geometric coordinates: \textit{Magnitude} ($M$), representing mean systemic capacity, and \textit{Imbalance} ($I$), representing the structural skew (Euclidean distance from the identity line):
 \begin{equation}
-    M(s) = \frac{O + L + E}{3}, \quad I(s) = \sqrt{\frac{\sum (x_i - M)^2}{3}}.
+    M(s) = \frac{1}{3} \sum_{i=1}^{3} x_i, \quad I(s) = \sqrt{\frac{1}{3} \sum_{i=1}^{3} (x_i - M)^2}.
 \end{equation}
 
 \section{Hypotheses}
 
-\paragraph{H1 (The Continuous Manifold).} 
+\paragraph{H1 (The Continuous Manifold).}
 State architectures exist on a continuous, low-dimensional manifold rather than in statistically separable regime clusters. Transitions between regime types are modeled as continuous translations in $\mathbb{R}^3_{\ge 0}$.
 
-\paragraph{H2 (The Funnel of Capacity).} 
+\paragraph{H2 (The Funnel of Capacity).}
 Institutional imbalance strictly limits the maximum achievable magnitude of a state. We hypothesize that the upper boundary of the possibility space, $M_{\max}(I)$, is a strictly decreasing function of imbalance:
 \begin{equation}
     \frac{d M_{\max}}{d I} < 0.
 \end{equation}
 This relationship establishes a heteroscedastic ``funnel'' that bounds state development.
 
-\paragraph{H3 (Baseline Validation).} 
+\paragraph{H3 (Baseline Validation).}
 Institutional Magnitude ($M$) positively correlates with objective societal prosperity (HDI and Log GDP).
 
-\paragraph{H4 (The Catalyst of Imbalance).} 
-Holding $M$ constant, institutional imbalance ($I$) acts as a functional mechanism for development. We hypothesize that asymmetrical institutional growth yields an ``Imbalance Premium'' in societal outcomes.
+\paragraph{H4 (The Catalyst of Imbalance).}
+Holding $M$ constant, institutional imbalance ($I$) is structurally associated with functional development. We hypothesize that asymmetrical institutional growth correlates with an ``Imbalance Premium'' in societal outcomes.
 
 \section{Data and Methodology}
 
-We combine macro-level indicators utilizing data from the World Values Survey (WVS, 2020), Varieties of Democracy (V-Dem, 2019), the World Bank (2019), the Bertelsmann Transformation Index (BTI, 2018), the World Justice Project (WJP, 2019), Transparency International (TI, 2019), and the United Nations Development Programme (UNDP, 2018). 
+We combine macro-level indicators utilizing data from the World Values Survey (WVS, 2020), Varieties of Democracy (V-Dem, 2019), the World Bank (2019), the Bertelsmann Transformation Index (BTI, 2018), the World Justice Project (WJP, 2019), Transparency International (TI, 2019), and the United Nations Development Programme (UNDP, 2018).
 
 To mitigate geographic selection bias—wherein dropping countries with a single missing indicator heavily biases the sample toward wealthy Western democracies—K-Nearest Neighbors (KNN) imputation ($k=5$) is utilized to estimate missing systemic parameters, a standard approach for continuous multi-dimensional matrices (Troyanskaya et al., 2001). This approach successfully recovers a robust sample of $N=66$ nation-states with complete institutional profiles.
 
 The triad is constructed using thirteen standardized indices carefully categorized to prevent conceptual overlap: \textit{Order} (e.g., WJP Rule of Law, BTI Stateness, TI Corruption Perception), \textit{Liberty} (e.g., V-Dem Freedom of Expression, Freedom of Association), and \textit{Equality} (e.g., V-Dem Equal Distribution of Resources, Educational Equality).
+
+Variables within each core dimension are equally weighted to calculate the dimensional coordinates. While dynamic component weighting (e.g., via PCA loadings) was considered, equal weighting was retained for strict theoretical parsimony and to preserve the symmetrical geometry of the manifold.
+
+To evaluate the structural independence of these dimensions, an unconstrained 3-com\-po\-nent Principal Component Analysis (PCA) was conducted on the raw indicators. The unconstrained model revealed functional, collinear groupings rather than clean conceptual ones; for instance, foundational rule of law naturally clustered with health equality, reflecting a generalized ``wealth and capacity'' latent factor. Rather than relying on these purely data-driven groupings, this study deliberately enforces the theoretically constrained Triad (Postulate 1). This theoretical constraint prevents the manifold from collapsing into a simple proxy for baseline wealth, allowing us to explicitly test the geometric trade-offs between classic Mar\-shal\-li\-an and Dah\-li\-an dimensions of governance.
 
 When unconstrained Principal Component Analysis (PCA) is applied to the thirteen raw institutional indicators, the algorithm requires only five components to explain 90\% of the global variance. This mathematical validation suggests that these highly complex variables are tightly coupled, naturally collapsing into a low-dimensional latent space. We then construct the theoretical triad and utilize PCA, Uniform Manifold Approximation and Projection (UMAP), and K-Means clustering to test H1. Quantile Regression is applied to test the boundary constraints of H2, and Multivariate OLS Regression evaluates societal outcomes (HDI and Log GDP) for H3 and H4. Variance Inflation Factor (VIF) analysis and visual residual diagnostics confirm the OLS models do not violate strict assumptions of multicollinearity and homoscedasticity (Wooldridge, 2015).
 
@@ -111,20 +115,24 @@ When unconstrained Principal Component Analysis (PCA) is applied to the thirteen
 
 \subsection{Geometry and Continuity (H1)}
 
-PCA on the constructed institutional triad reveals a highly robust dimensional structure. When setting the algorithm to extract three components, the primary axis (PC1) accounts for an overwhelming $81.4\%$ of all global variance. The PCA loadings reveal the exact structural nature of the manifold: PC1 is uniformly positive across Order ($0.607$), Liberty ($0.546$), and Equality ($0.576$). This establishes mathematically that PC1 is strongly aligned with our geometric equation for overall Institutional Magnitude ($M(s)$). 
+PCA on the constructed institutional triad reveals a highly robust dimensional structure. When setting the algorithm to extract three components, the primary axis (PC1) accounts for an overwhelming $81.4\%$ of all global variance. The PCA loadings reveal the exact structural nature of the manifold: PC1 is uniformly positive across Order ($0.607$), Liberty ($0.546$), and Equality ($0.576$). This establishes mathematically that PC1 is strongly aligned with our geometric equation for overall Institutional Magnitude ($M(s)$).
 
-The second component (PC2, $13.4\%$ variance) isolates the primary topological trade-off in global governance. It loads heavily on Liberty ($0.790$) and negatively on Equality ($-0.594$), representing a structural skew between negative freedoms and resource distribution. This tension mathematically corresponds to our geometric concept of Imbalance ($I(s)$). 
+The second component (PC2, $13.4\%$ variance) isolates the primary topological trade-off in global governance. It loads heavily on Liberty ($0.790$) and negatively on Equality ($-0.594$), representing a structural skew between negative freedoms and resource distribution. This tension mathematically corresponds to our geometric concept of Imbalance ($I(s)$).
 
 Finally, the third component (PC3) accounts for a negligible $5.1\%$ of the variance. It models an authoritarian skew, loading heavily on Order ($0.780$) while penalizing both Liberty ($-0.276$) and Equality ($-0.560$). Because $94.8\%$ of the total variance is captured by just the first two axes, this confirms that the theoretical three-dimensional triad effectively collapses into a two-dimensional continuous surface.
 
+In this coordinate system, the manifold is centered at the global sample mean ($0,0$). Consequently, a positive Magnitude ($x > 0$) indicates systemic capacity above the sample average, while the Imbalance axis ($y$) captures deviations from the sample's primary structural trade-off.
+
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/fig1_pca_manifold.eps}
-    \caption{\textbf{The Continuous Manifold of State Governance.} PCA projection of $N=66$ nation-states. The lack of isolated geometric clusters illustrates that regime architectures exist on a continuous spectrum.}
+    \includegraphics[width=0.7\textwidth]{../figures/fig1_pca_manifold.eps}
+    \caption{\textbf{The Continuous Manifold of State Governance.} Two-dimensional PCA projection of $N=66$ nation-states. The horizontal axis represents overall Institutional Magnitude, derived from the first principal component (PC1 orientation inverted for intuitive capacity scaling). The vertical axis represents Structural Imbalance (PC2). Labeled anchor states illustrate that diverse geopolitical regimes exist on a continuous mathematical spectrum rather than within discrete categorical clusters.}
     \label{fig:pca_manifold}
 \end{figure}
 
-Visualizations of the institutional space (Figure \ref{fig:pca_manifold}) reveal a continuous, unbroken cloud of nation-states. There are no distinct topological chasms separating regime types; they blend seamlessly based on incremental geometric shifts. The raw three-dimensional topology (Figure \ref{fig:3d_manifold}) further corroborates this continuity. 
+Visualizations of the institutional space (Figure \ref{fig:pca_manifold}) reveal a continuous, unbroken cloud of nation-states. There are no distinct topological chasms separating regime types; they blend seamlessly based on incremental geometric shifts. The raw three-dimensional topology (Figure \ref{fig:3d_manifold}) further corroborates this continuity.
+
+Despite this continuity, the manifold reveals distinct topological ``neighborhoods'' corresponding to established geopolitical families. A tight cluster of advanced industrial democracies (e.g., Germany, Japan, UK) occupies the high-magnitude, low-skew region. Conversely, large-scale asymmetric powers such as China, Russia, and Iran gravitate toward a shared region of high structural imbalance, while major developing democracies (India, Brazil, Indonesia) occupy a distinct, third quadrant. The fact that these families emerge naturally from the geometric coordinates without categorical labeling provides strong empirical support for the construct validity of the Triad model.
 
 \begin{figure}[htbp]
     \centering
@@ -137,7 +145,7 @@ As a robust geometric check, a non-linear UMAP projection was applied to the tri
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/fig3_umap_projection.eps}
+    \includegraphics[width=0.7\textwidth]{../figures/fig3_umap_projection.eps}
     \caption{\textbf{UMAP Projection of State Governance.} This non-linear topological reduction confirms that nation-states form a continuous spectrum rather than isolated clusters.}
     \label{fig:umap}
 \end{figure}
@@ -146,18 +154,18 @@ To test H1 formally, k-means clustering was applied. As illustrated in Figure \r
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/fig4_silhouette_scores.eps}
+    \includegraphics[width=0.5\textwidth]{../figures/fig4_silhouette_scores.eps}
     \caption{\textbf{Silhouette Scores for K-Means Clustering.} Consistently low scores provide mathematical support for the continuous manifold hypothesis.}
     \label{fig:silhouette}
 \end{figure}
 
 \subsection{The Funnel of State Capacity (H2)}
 
-Plotting Institutional Imbalance ($x$) against Magnitude ($y$) reveals a strict heteroscedastic boundary constraint, providing strong empirical support for H2. As illustrated in Figure \ref{fig:funnel}, the 10th and 90th percentile quantile regressions form an envelope that narrows dramatically as Magnitude increases. 
+Plotting Institutional Imbalance ($x$) against Magnitude ($y$) reveals a strict heteroscedastic boundary constraint, providing strong empirical support for H2. As illustrated in Figure \ref{fig:funnel}, the 10th and 90th percentile quantile regressions form an envelope that narrows dramatically as Magnitude increases.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/fig5_funnel_capacity.eps}
+    \includegraphics[width=0.5\textwidth]{../figures/fig5_funnel_capacity.eps}
     \caption{\textbf{The Boundary Constraints of State Development.} Scatter distribution of Magnitude vs. Imbalance. The dashed lines (10th and 90th percentiles) form a heteroscedastic funnel, demonstrating that achieving peak state capacity strictly requires dimensional balance.}
     \label{fig:funnel}
 \end{figure}
@@ -166,17 +174,19 @@ This geometric constraint mathematically formalizes two concurrent realities of 
 
 \subsection{Outcomes and the Imbalance Premium (H3 \& H4)}
 
-The multivariate OLS regressions provide the primary empirical test of the theoretical framework. The models exhibit strong explanatory power ($R^2 = 0.697$ for HDI and $R^2 = 0.658$ for Log GDP per capita). 
+The multivariate OLS regressions provide the primary empirical test of the theoretical framework. The models exhibit strong explanatory power ($R^2 = 0.697$ for HDI and $R^2 = 0.658$ for Log GDP per capita).
 
-Validating H3 (Baseline Validation), Institutional Magnitude is a strong, statistically significant predictor of prosperity. A 1-unit increase in average capacity is associated with a $0.1265$ increase in HDI ($p < 0.001$) and a $0.9618$ increase in Log GDP ($p < 0.001$). 
+Validating H3 (Baseline Validation), Institutional Magnitude is a strong, statistically significant predictor of prosperity. A 1-unit increase in average capacity is associated with a $0.1265$ increase in HDI ($p < 0.001$) and a $0.9618$ increase in Log GDP ($p < 0.001$).
 
 However, testing H4 yields a profound and counter-normative discovery: the ``Imbalance Premium.'' Controlling for overall magnitude, institutional imbalance exhibits a positive, statistically significant coefficient for both HDI ($\beta = 0.1134, p = 0.005$) and Log GDP ($\beta = 1.0406, p = 0.002$). This indicates that, holding average state capacity constant, states that prioritize one axis at the expense of others actually achieve higher economic prosperity and human development than perfectly balanced states at the exact same systemic baseline.
 
 To verify the robustness of these results, diagnostic tests were evaluated. Visual inspection of the residuals plotted against fitted values (Figure \ref{fig:residuals}) reveals a generally random distribution of errors, confirming the absence of severe heteroscedasticity. Additionally, the Durbin-Watson statistics for both models ($1.97$ and $1.82$, respectively) indicate no severe autocorrelation. While the HDI model exhibits slight non-normality in the residuals (Omnibus $p = 0.003$), the Log GDP model's residuals are highly normal (Omnibus $p = 0.874$), confirming that our standard errors and significance levels for the primary economic indicator are statistically reliable.
 
+To ensure these findings were not artifacts of the K-Nearest Neighbors imputation process, a strict complete case analysis was conducted as a robustness check. The models were re-run strictly on the subset of nations with perfectly complete baseline data ($N=30$). Even with a drastically reduced sample size, the core findings remained remarkably robust. The ``Imbalance Premium'' held high statistical significance ($\beta = 1.295, p = 0.003$), and model diagnostics remained exceptionally clean ($R^2 = 0.592$, Durbin-Watson = $1.94$). This confirms that the observed geometric correlation between structural asymmetry and societal prosperity is a genuine topological feature of the data, rather than an algorithmic ghost.
+
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/fig6_residuals.eps}
+    \includegraphics[width=0.5\textwidth]{../figures/fig6_residuals.eps}
     \caption{\textbf{OLS Diagnostic: Residuals vs. Fitted Values.} The random distribution of errors confirms the absence of severe heteroscedasticity.}
     \label{fig:residuals}
 \end{figure}
@@ -185,7 +195,7 @@ To verify the robustness of these results, diagnostic tests were evaluated. Visu
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.65\textwidth]{../figures/fig7_hdi_map.eps}
+    \includegraphics[width=0.5\textwidth]{../figures/fig7_hdi_map.eps}
     \caption{\textbf{The Vanguard Theory of Development.} Institutional geometries colored by normalized HDI scores. Highly imbalanced states consistently achieve higher development outcomes than balanced states at a lower capacity baseline.}
     \label{fig:hdimap}
 \end{figure}
@@ -210,69 +220,69 @@ The Python source code, generated figures, and full replication instructions for
 \section*{References}
 \begin{description}
 
-\item Acemoglu, D., \& Robinson, J. (2012). \textit{Why Nations Fail: The Origins of Power, Prosperity, and Poverty}. Crown.
+    \item Acemoglu, D., \& Robinson, J. (2012). \textit{Why Nations Fail: The Origins of Power, Prosperity, and Poverty}. Crown.
 
-\item Acemoglu, D., \& Robinson, J. (2019). \textit{The Narrow Corridor: States, Societies, and the Fate of Liberty}. Penguin.
+    \item Acemoglu, D., \& Robinson, J. (2019). \textit{The Narrow Corridor: States, Societies, and the Fate of Liberty}. Penguin.
 
-\item Amsden, A. H. (1989). \textit{Asia's Next Giant: South Korea and Late Industrialization}. Oxford University Press.
+    \item Amsden, A. H. (1989). \textit{Asia's Next Giant: South Korea and Late Industrialization}. Oxford University Press.
 
-\item Bäck, H., \& Hadenius, A. (2008). Democracy and State Capacity: Exploring a J-shaped Relationship. \textit{Governance}, 21(1), 1–24.
+    \item Bäck, H., \& Hadenius, A. (2008). Democracy and State Capacity: Exploring a J-shaped Relationship. \textit{Governance}, 21(1), 1–24.
 
-\item Berlin, I. (1958). \textit{Two Concepts of Liberty}. Oxford University Press.
+    \item Berlin, I. (1958). \textit{Two Concepts of Liberty}. Oxford University Press.
 
-\item Bertelsmann Stiftung. (2018). \textit{Transformation Index (BTI) Dataset}.
+    \item Bertelsmann Stiftung. (2018). \textit{Transformation Index (BTI) Dataset}.
 
-\item Bertalanffy, L. (1968). \textit{General System Theory: Foundations, Development, Applications}. George Braziller.
+    \item Bertalanffy, L. (1968). \textit{General System Theory: Foundations, Development, Applications}. George Braziller.
 
-\item Blind, P. K. (2014). \textit{Policy-Driven Democratization: Geometrical Perspectives on Transparency, Accountability, and Corruption}. Palgrave.
+    \item Blind, P. K. (2014). \textit{Policy-Driven Democratization: Geometrical Perspectives on Transparency, Accountability, and Corruption}. Palgrave.
 
-\item Dahl, R. A. (1971). \textit{Polyarchy: Participation and Opposition}. Yale University Press.
+    \item Dahl, R. A. (1971). \textit{Polyarchy: Participation and Opposition}. Yale University Press.
 
-\item Fukuyama, F. (2011). \textit{The Origins of Political Order: From Prehuman Times to the French Revolution}. Farrar, Straus and Giroux.
+    \item Fukuyama, F. (2011). \textit{The Origins of Political Order: From Prehuman Times to the French Revolution}. Farrar, Straus and Giroux.
 
-\item Hanson, J. K., \& Sigman, R. (2021). Leviathan's Latent Dimensions: Measuring State Capacity for Comparative Political Research. \textit{Journal of Politics}, 83(4), 1495–1510.
+    \item Hanson, J. K., \& Sigman, R. (2021). Leviathan's Latent Dimensions: Measuring State Capacity for Comparative Political Research. \textit{Journal of Politics}, 83(4), 1495–1510.
 
-\item Hobbes, T. (1651). \textit{Leviathan}. Penguin Classics.
+    \item Hobbes, T. (1651). \textit{Leviathan}. Penguin Classics.
 
-\item Huntington, S. P. (1968). \textit{Political Order in Changing Societies}. Yale University Press.
+    \item Huntington, S. P. (1968). \textit{Political Order in Changing Societies}. Yale University Press.
 
-\item Liu, W., \& Li, J. (2019). Unbalanced Institutions in Market Transition: How Do They Matter for Firm Strategic Choices and Performance in Emerging Economies? \textit{Management International Review}, 59(5), 675–702.
+    \item Liu, W., \& Li, J. (2019). Unbalanced Institutions in Market Transition: How Do They Matter for Firm Strategic Choices and Performance in Emerging Economies? \textit{Management International Review}, 59(5), 675–702.
 
-\item Luhmann, N. (1995). \textit{Social Systems}. Stanford University Press.
+    \item Luhmann, N. (1995). \textit{Social Systems}. Stanford University Press.
 
-\item Marshall, T. H. (1950). \textit{Citizenship and Social Class}. Cambridge University Press.
+    \item Marshall, T. H. (1950). \textit{Citizenship and Social Class}. Cambridge University Press.
 
-\item Mehran, G. (2003). The Paradox of Tradition and Modernity in Female Education in the Islamic Republic of Iran. \textit{Comparative Education Review}, 47(3), 269–286.
+    \item Mehran, G. (2003). The Paradox of Tradition and Modernity in Female Education in the Islamic Republic of Iran. \textit{Comparative Education Review}, 47(3), 269–286.
 
-\item North, D. (1990). \textit{Institutions, Institutional Change and Economic Performance}. Cambridge University Press.
+    \item North, D. (1990). \textit{Institutions, Institutional Change and Economic Performance}. Cambridge University Press.
 
-\item Rawls, J. (1971). \textit{A Theory of Justice}. Harvard University Press.
+    \item Rawls, J. (1971). \textit{A Theory of Justice}. Harvard University Press.
 
-\item Ross, M. L. (2012). \textit{The Oil Curse: How Petroleum Wealth Shapes the Development of Nations}. Princeton University Press.
+    \item Ross, M. L. (2012). \textit{The Oil Curse: How Petroleum Wealth Shapes the Development of Nations}. Princeton University Press.
 
-\item Rousseeuw, P. J. (1987). Silhouettes: A Graphical Aid to the Interpretation and Validation of Cluster Analysis. \textit{Journal of Computational and Applied Mathematics}, 20, 53–65.
+    \item Rousseeuw, P. J. (1987). Silhouettes: A Graphical Aid to the Interpretation and Validation of Cluster Analysis. \textit{Journal of Computational and Applied Mathematics}, 20, 53–65.
 
-\item Sen, A. (1999). \textit{Development as Freedom}. Oxford University Press.
+    \item Sen, A. (1999). \textit{Development as Freedom}. Oxford University Press.
 
-\item Simon, H. (1962). The Architecture of Complexity. \textit{Proceedings of the American Philosophical Society}, 106(6), 467–482.
+    \item Simon, H. (1962). The Architecture of Complexity. \textit{Proceedings of the American Philosophical Society}, 106(6), 467–482.
 
-\item Transparency International. (2019). \textit{Corruption Perceptions Index Dataset}. 
+    \item Transparency International. (2019). \textit{Corruption Perceptions Index Dataset}.
 
-\item Troyanskaya, O., Cantor, M., Sherlock, G., Brown, P., Hastie, T., Tibshirani, R., Botstein, D., \& Altman, R. B. (2001). Missing Value Estimation Methods for DNA Microarrays. \textit{Bioinformatics}, 17(6), 520–525.
+    \item Troyanskaya, O., Cantor, M., Sherlock, G., Brown, P., Hastie, T., Tibshirani, R., Botstein, D., \& Altman, R. B. (2001). Missing Value Estimation Methods for DNA Microarrays. \textit{Bioinformatics}, 17(6), 520–525.
 
-\item United Nations Development Programme. (2018). \textit{Human Development Index Dataset}.
+    \item United Nations Development Programme. (2018). \textit{Human Development Index Dataset}.
 
-\item V-Dem Institute. (2019). \textit{Varieties of Democracy (V-Dem) Dataset}. 
+    \item V-Dem Institute. (2019). \textit{Varieties of Democracy (V-Dem) Dataset}.
 
-\item Wade, R. (1990). \textit{Governing the Market: Economic Theory and the Role of Government in East Asian Industrialization}. Princeton University Press.
+    \item Wade, R. (1990). \textit{Governing the Market: Economic Theory and the Role of Government in East Asian Industrialization}. Princeton University Press.
 
-\item Wooldridge, J. M. (2015). \textit{Introductory Econometrics: A Modern Approach} (6th ed.). Cengage Learning.
+    \item Wooldridge, J. M. (2015). \textit{Introductory Econometrics: A Modern Approach} (6th ed.). Cengage Learning.
 
-\item World Bank. (2019). \textit{World Development Indicators Dataset}. 
+    \item World Bank. (2019). \textit{World Development Indicators Dataset}.
 
-\item World Justice Project. (2019). \textit{Rule of Law Index Dataset}. 
+    \item World Justice Project. (2019). \textit{Rule of Law Index Dataset}.
 
-\item World Values Survey Association. (2020). \textit{World Values Survey Wave 7 Dataset}. 
+    \item World Values Survey Association. (2020). \textit{World Values Survey Wave 7 Dataset}.
 
 \end{description}
 

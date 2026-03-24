@@ -224,6 +224,11 @@ paper/*.toc
 paper/*.fdb_latexmk
 paper/*.synctex.gz
 paper/*.fls
+paper/*.bbl
+paper/*.blg
+paper/*.nav
+paper/*.snm
+paper/*.vrb
 paper/*-eps-converted-to.pdf
 
 # 3. The Final Manuscript (The "Artifact")
